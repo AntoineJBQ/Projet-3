@@ -1,0 +1,18 @@
+-- 11 Moyennes de valeurs foncières pour le top 3 des communes des départements 6, 13, 33, 59 et 69.
+select c.code_dep as departement, c.nom_commune as commune, ROUND(AVG(v.Valeur)) as moyenne_valeur_fonciere
+from Bien b
+join Commune c on b.Commune_Id_codedep_codecommune = c.Id_codedep_codecommune
+join Vente v on id_bien = v.Id_vente
+where c.code_dep in ('06', '13', '33', '59', '69')
+group by c.code_dep, c.nom_commune
+having AVG(v.Valeur) in (
+  select AVG(v2.Valeur) as moyenne_valeur_fonciere
+  from Bien b2
+  join Commune c2 on b2.Commune_Id_codedep_codecommune = c2.Id_codedep_codecommune
+  join Vente v2 on b2.id_bien = v2.Id_vente
+  where c2.code_dep = c.code_dep
+  group by c2.nom_commune
+  order by moyenne_valeur_fonciere DESC
+  LIMIT 3
+)
+order by c.code_dep, moyenne_valeur_fonciere DESC;

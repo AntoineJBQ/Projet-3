@@ -1,0 +1,8 @@
+-- 4 Liste des 10 départements où le prix du mètre carré est le plus élevé.
+select ROUND(AVG(Valeur/Surface_carrez), 2) as prix_m2, 
+   code_dep AS departement from Bien 
+left join Vente on Bien.Id_bien = Vente.Id_vente 
+left join Commune on Commune.Id_codedep_codecommune = Bien.Commune_Id_codedep_codecommune 
+group by code_dep 
+order by prix_m2 DESC 
+LIMIT 10;

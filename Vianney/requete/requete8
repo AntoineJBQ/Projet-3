@@ -1,0 +1,9 @@
+-- 8 Classement des régions par rapport au prix au mètre carré des appartements de plus de 4 pièces.
+select nom_region as region, round(AVG(Valeur / Surface_carrez)) as prix_m2
+from Bien 
+join Vente on id_bien = Id_vente
+join Commune on Commune_Id_codedep_codecommune = Id_codedep_codecommune
+join Region  on region_Id_region = Id_region
+where Total_piece > 4 and Type_local = 'Appartement'
+group by nom_region
+order by prix_m2 DESC;

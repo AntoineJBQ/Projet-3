@@ -1,0 +1,4 @@
+-- 10 Différence en pourcentage du prix au mètre carré entre un appartement de 2 pièces et un appartement de 3 pièces.
+select round((((select avg(valeur/surface_local) from vente v left join bien b on id_vente = id_bien where total_piece = 3) -
+(select avg(valeur/surface_local) from vente v left join bien b on id_vente = id_bien where total_piece = 2)) /
+(select avg(valeur/surface_local) from vente v left join bien b on id_vente = id_bien where total_piece = 2))*100,2) as difference_en_pourcentage_du_prix_m2_appartement_2_et_3_pieces

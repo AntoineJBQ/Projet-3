@@ -1,0 +1,4 @@
+--1 Nombre total d'appartements vendus au premier semestre 2020.
+select count(Id_vente) as nombre_appartements_vendus_premier_semestre_2020 ,Type_local from Bien, Vente
+on Id_bien = Id_vente
+where Type_local='Appartement'

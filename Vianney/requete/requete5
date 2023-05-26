@@ -1,0 +1,6 @@
+-- 5 Prix moyen du mètre carré d'une maison en Île-de-France.
+select  round(avg(valeur)/surface_carrez,2) as prix_m², nom_region as region , type_local as type from Vente
+left join Bien  on id_bien = Id_vente
+left join Commune on commune_id_codedep_codecommune = id_codedep_codecommune
+left join Region on region_id_region = id_region
+where type_local = "Maison" and nom_region = "Ile-de-France"

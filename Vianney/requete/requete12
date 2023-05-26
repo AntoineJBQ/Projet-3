@@ -1,0 +1,9 @@
+SELECT c.nom_commune AS commune, ROUND(COUNT(v.Id_vente) * 1000.0 / p.nombre_dhabitant, 2) AS transactions_pour_mille_habitants
+FROM Commune c
+LEFT JOIN Population p ON c.Id_codedep_codecommune = p.Id_codedep_codecommune
+LEFT JOIN Bien b ON c.Id_codedep_codecommune = b.commune_Id_codedep_codecommune
+LEFT JOIN Vente v ON b.Id_bien = v.bien_Id_bien
+WHERE p.nombre_dhabitant > 10000
+GROUP BY c.Id_codedep_codecommune
+ORDER BY transactions_pour_mille_habitants DESC
+LIMIT 20;

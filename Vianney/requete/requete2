@@ -1,0 +1,8 @@
+-- 2 Nombre de ventes d'appartement par région pour le premier semestre 2020.
+select count(id_vente) as nombre_de_vente ,regroup_region, type_local from Vente v
+join Bien  on Id_bien = Id_vente
+join Commune on commune_id_codedep_codecommune = id_codedep_codecommune
+join Region on region_id_region = id_region
+where type_local = 'Appartement'
+group by regroup_region
+order by count(v.id_vente) desc

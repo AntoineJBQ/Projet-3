@@ -1,0 +1,9 @@
+-- 9 Liste des communes ayant eu au moins 50 ventes au premier trimestre.
+SELECT c.nom_commune AS commune, COUNT(v.id_vente) AS nombre_de_vente
+FROM bien b
+JOIN vente v ON b.id_bien = v.id_vente
+JOIN commune c ON b.commune_Id_codedep_codecommune = c.id_codedep_codecommune
+WHERE SUBSTR(v.date_vente, 6, 2) BETWEEN '01' AND '03' -- Filtrer le premier trimestre
+GROUP BY c.nom_commune
+HAVING COUNT(v.id_vente) >= 50
+ORDER BY nombre_de_vente DESC;

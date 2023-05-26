@@ -1,0 +1,8 @@
+--REQUETE 7 Taux d'évolution du nombre de ventes entre le premier et le second trimestre de 2020.
+select ROUND(((select COUNT(Id_vente) from Vente
+where date_vente >= '2020/01/01' and date_vente <= '2020/03/31') - 
+(select COUNT(Id_vente) from Vente
+where date_vente >= '2020/04/01' and date_vente <= '2020/06/30')) * 1.0 /
+(select COUNT(Id_vente) from Vente
+where date_vente >= '2020/01/01' and date_vente <= '2020/03/31')*100,2) AS taux_evolution_nombre_de_vente_premier_et_second_trimestre_2020;
+-- le * 1.0 permet d'obtenir un float pour conserver la partie décimale du résultat

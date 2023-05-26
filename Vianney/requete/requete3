@@ -1,0 +1,5 @@
+-- 3 Proportion des ventes d'appartements par le nombre de pièces.
+select Total_piece as nombre_de_piece, count(id_bien)*100 / (select count(Id_bien) from Bien where type_local = 'Appartement') as proportion_ventes_appartements_par_pièce from Bien 
+where type_local = 'Appartement'
+group by Total_piece
+order by count(id_bien)*100 / (select count(Id_bien) from Bien where Type_local = 'Appartement') desc
